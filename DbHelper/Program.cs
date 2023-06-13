@@ -1,6 +1,10 @@
 using DbHelper.BL.AuthBL.Managers;
 using DbHelper.BL.AuthBL.Services;
 using DbHelper.BL.Extensions;
+using DbHelper.BL.OtherServices;
+using DbHelper.BL.ProjectBL;
+using DbHelper.DAL.Data;
+using DbHelper.DAL.Entities.DbHelper;
 using DbHelper.DAL.Entities.Identity;
 using DbHelper.WebApi.AuthBL.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -27,6 +31,20 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.AddTransient<TokenService>();
 builder.Services.AddTransient<AuthManager>();
+builder.Services.AddTransient<GetUserService>();
+builder.Services.AddTransient<ValidateService>();
+builder.Services.AddTransient<ProjectManager>();
+builder.Services.AddTransient<EmployeeManager>();
+builder.Services.AddTransient<FilterService>();
+builder.Services.AddTransient<ProjectEmployeeManager>();
+
+builder.Services.AddTransient<IRepository<Employee>, Repository<Employee>>();
+builder.Services.AddTransient<IRepository<IdentityUserRole<int>>, Repository<IdentityUserRole<int>>>();
+builder.Services.AddTransient<IRepository<Project>, Repository<Project>>();
+builder.Services.AddTransient<IRepository<ProjectEmployee>, Repository<ProjectEmployee>>();
+builder.Services.AddTransient<ProjectRepository>();
+builder.Services.AddTransient<ProjectEmployeeRepository>();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>

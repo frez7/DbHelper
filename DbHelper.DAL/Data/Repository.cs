@@ -42,5 +42,6 @@ namespace DbHelper.DAL.Data
             _dbSet.Update(entity);
             await _context.SaveChangesAsync();
         }
+
     }
 }

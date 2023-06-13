@@ -63,16 +63,65 @@ namespace DbHelper.WebApi.AuthBL.Data
             modelBuilder.Entity<Role>().HasData(new Role { Id = 3, Name = "Admin", NormalizedName = "ADMIN".ToUpper() });
 
             var hasher = new PasswordHasher<Employee>();
-
-            modelBuilder.Entity<Employee>().HasData(new Employee { Id = 1, UserName = "frez773", NormalizedUserName = "FREZ773",
-            Email = "freezedmail@gmail.com", NormalizedEmail = "FREEZEDMAIL@GMAIL.COM",
-                PasswordHash = hasher.HashPassword(null, "masterpass"), EmailConfirmed = true,
-                LockoutEnabled = false, SecurityStamp = Guid.NewGuid().ToString(),
-                FirstName = "Аширхан", LastName = "Аутахунов", FatherName = "Адылжанович"});
+            
+            modelBuilder.Entity<Employee>().HasData(new Employee 
+            { 
+                Id = 1, 
+                UserName = "frez773", 
+                NormalizedUserName = "FREZ773",
+                Email = "freezedmail@gmail.com", 
+                NormalizedEmail = "FREEZEDMAIL@GMAIL.COM",
+                PasswordHash = hasher.HashPassword(null, "masterpass"), 
+                EmailConfirmed = true,
+                LockoutEnabled = false, 
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Аширхан", 
+                LastName = "Аутахунов", 
+                FatherName = "Адылжанович"});
+            modelBuilder.Entity<Employee>().HasData(new Employee
+            {
+                Id = 2,
+                UserName = "test1",
+                NormalizedUserName = "TEST1",
+                Email = "test1@example.com",
+                NormalizedEmail = "TEST1@EXAMPLE.COM",
+                PasswordHash = hasher.HashPassword(null, "masterpass"),
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Амантур",
+                LastName = "Амантуров",
+                FatherName = "Амантурович"
+            });
+            modelBuilder.Entity<Employee>().HasData(new Employee
+            {
+                Id = 3,
+                UserName = "test2",
+                NormalizedUserName = "TEST2",
+                Email = "test2@example.com",
+                NormalizedEmail = "TEST2@EXAMPLE.COM",
+                PasswordHash = hasher.HashPassword(null, "masterpass"),
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                FirstName = "Атай",
+                LastName = "Атаев",
+                FatherName = "Атайбекович"
+            });
             modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
             {
                 RoleId = 3,
                 UserId = 1,
+            });
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
+            {
+                RoleId = 2,
+                UserId = 2,
+            });
+            modelBuilder.Entity<IdentityUserRole<int>>().HasData(new IdentityUserRole<int>
+            {
+                RoleId = 1,
+                UserId = 3,
             });
             #endregion
         }
