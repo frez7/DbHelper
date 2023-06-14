@@ -65,10 +65,6 @@ namespace DbHelper.WebApi.AuthBL.Data
                 .WithMany(p => p.Tasks)
                 .HasForeignKey(t => t.ProjectId)
                 .OnDelete(DeleteBehavior.NoAction);
-            modelBuilder.Entity<Project>()
-                .HasOne(p => p.Owner)
-                .WithMany()
-                .HasForeignKey(p => p.OwnerId);
 
             #region SeedData
             #region SeedIdentity

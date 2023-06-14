@@ -15,6 +15,7 @@ namespace DbHelper.DAL.Entities.DbHelper
         public DateTime StartedAt { get; set; }
         public DateTime? CompletedAt {  get; set; }
         public int Priority { get;set; }
+        
 
     }
 }

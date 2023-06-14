@@ -32,38 +32,18 @@ namespace DbHelper.BL.ProjectBL
         public async Task<Response> AddEmployeeToProject(int employeeId, int projectId)
         {
             var ownerId = await _getUserService.GetCurrentUserId();
-            var roles = await _getUserService.GetCurrentUserRoles();
             var employee = await _employeeRepository.GetByIdAsync(employeeId);
-            if (employee == null)
-            {
-                throw new Exception("Данного сотрудника не существует!");
-            }
             var project = await _projectRepository.GetByIdAsync(projectId);
-            if (project == null)
-            {
-                throw new Exception("Данного проекта не существует!");
-            }
-            var ownProjects = await _projectRepository.GetOwningProject(ownerId);
             var projectEmployee = new ProjectEmployee
             {
-                EmployeeId = employeeId,
-                ProjectId = projectId,
+                Employee = employee,
+                Project = project,
             };
-            if (!ownProjects.Contains(project))
-            {
-                if (roles.Contains("Admin"))
-                {
-                    await _projectEmployeeRepository.AddAsync(projectEmployee);
-                    return new Response(200, true, "Вы успешно добавили сотрудника в данный проект");
-                }
-                throw new Exception("Вы не менеджер данного проекта!");
-            }
             var projects = await _projectRepository.GetEmployeeProjects(employeeId);
             if (projects.Contains(project))
             {
-                throw new Exception("Данного сотрудник уже есть в данном проекте!");
-            }
-            
+                return new Response(400, false, "Данного сотрудник уже есть в данном проекте!");
+            } 
             await _projectEmployeeRepository.AddAsync(projectEmployee);
             return new Response(200, true, "Вы успешно добавили сотрудника в данный проект");
         }
