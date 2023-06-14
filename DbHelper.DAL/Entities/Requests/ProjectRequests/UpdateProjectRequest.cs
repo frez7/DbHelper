@@ -9,5 +9,6 @@
         public DateTime StartedAt { get; set; }
         public DateTime? CompletedAt { get; set; }
         public int Priority { get; set; }
+        public int OwnerId { get; set; }
     }
 }

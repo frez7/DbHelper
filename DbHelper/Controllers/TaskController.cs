@@ -58,7 +58,7 @@ namespace DbHelper.WebApi.Controllers
         {
             return await _taskManager.GetAllExecutingTasks(executorId);
         }
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin, Manager")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin, Manager, Employee")]
         [HttpGet("all/project-tasks/{projectId}")]
         public async Task<TaskDTOsResponse> GetAllProjectTasks(int projectId)
         {

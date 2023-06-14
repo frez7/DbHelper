@@ -65,10 +65,13 @@ namespace DbHelper.WebApi.AuthBL.Data
                 .WithMany(p => p.Tasks)
                 .HasForeignKey(t => t.ProjectId)
                 .OnDelete(DeleteBehavior.NoAction);
-
+            modelBuilder.Entity<Project>()
+                .HasOne(p => p.Owner)
+                .WithMany()
+                .HasForeignKey(p => p.OwnerId);
 
             #region SeedData
-            modelBuilder.Entity<Project>().HasOne(p => p.Owner).WithMany().HasForeignKey(p => p.OwnerId);
+            #region SeedIdentity
             modelBuilder.Entity<Role>().HasData(new Role { Id = 1, Name = "Employee", NormalizedName = "EMPLOYEE".ToUpper() });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 2, Name = "Manager", NormalizedName = "MANAGER".ToUpper() });
             modelBuilder.Entity<Role>().HasData(new Role { Id = 3, Name = "Admin", NormalizedName = "ADMIN".ToUpper() });
@@ -134,6 +137,103 @@ namespace DbHelper.WebApi.AuthBL.Data
                 RoleId = 1,
                 UserId = 3,
             });
+            #endregion
+            #region ProjectSeeding
+            modelBuilder.Entity<Project>().HasData(new Project
+            {
+                Id = 200,
+                Name = "R-Keeper CRM",
+                StartedAt = DateTime.UtcNow,
+                CustomerName = "Timely-Soft",
+                ExecutorName = "Sibers",
+                OwnerId = 2,
+                Priority = 2,
+            });
+
+            modelBuilder.Entity<Project>().HasData(new Project
+            {
+                Id = 201,
+                Name = "VisualTrade",
+                StartedAt = DateTime.UtcNow,
+                CustomerName = "EPAM",
+                ExecutorName = "Sibers",
+                OwnerId = 2,
+                Priority = 1,
+            });
+
+            modelBuilder.Entity<Project>().HasData(new Project
+            {
+                Id = 202,
+                Name = "NASA",
+                StartedAt = DateTime.UtcNow,
+                CustomerName = "SpaceX",
+                ExecutorName = "Sibers",
+                OwnerId = 2,
+                Priority = 1,
+            });
+            #endregion
+            #region ProjectEmployeeSeeding
+            modelBuilder.Entity<ProjectEmployee>().HasData(new ProjectEmployee 
+            {
+                EmployeeId = 3, 
+                ProjectId = 200 
+            });
+            modelBuilder.Entity<ProjectEmployee>().HasData(new ProjectEmployee
+            {
+                EmployeeId = 3,
+                ProjectId = 201
+            });
+            modelBuilder.Entity<ProjectEmployee>().HasData(new ProjectEmployee
+            {
+                EmployeeId = 1,
+                ProjectId = 200
+            });
+            modelBuilder.Entity<ProjectEmployee>().HasData(new ProjectEmployee
+            {
+                EmployeeId = 1,
+                ProjectId = 201
+            });
+            modelBuilder.Entity<ProjectEmployee>().HasData(new ProjectEmployee
+            {
+                EmployeeId = 1,
+                ProjectId = 202
+            });
+            #endregion
+            #region TaskSeeding
+            modelBuilder.Entity<ProjectTask>().HasData(new ProjectTask
+            {
+                Id = 300,
+                Name = "Разработать адронный коллайдер",
+                Comment = "Надеюсь ты справишься, давай побыстрее",
+                ExecutorId = 3,
+                OwnerId = 2,
+                ProjectId = 202,
+                Priority = 1,
+                Status = (DAL.Entities.Enums.TaskEnum)1
+            });
+            modelBuilder.Entity<ProjectTask>().HasData(new ProjectTask
+            {
+                Id = 301,
+                Name = "Создание машины времени",
+                Comment = "Надеюсь этого спринта тебе будет достаточно, удачи!",
+                ExecutorId = 1,
+                OwnerId = 2,
+                ProjectId = 201,
+                Priority = 1,
+                Status = (DAL.Entities.Enums.TaskEnum)1
+            });
+            modelBuilder.Entity<ProjectTask>().HasData(new ProjectTask
+            {
+                Id = 302,
+                Name = "Создание панацеи",
+                Comment = "Разработай бессмертие, дедлайн 3 дня",
+                ExecutorId = 1,
+                OwnerId = 2,
+                ProjectId = 200,
+                Priority = 1,
+                Status = (DAL.Entities.Enums.TaskEnum)1
+            });
+            #endregion
             #endregion
         }
     }

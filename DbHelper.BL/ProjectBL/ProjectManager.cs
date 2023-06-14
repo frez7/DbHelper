@@ -35,8 +35,9 @@ namespace DbHelper.BL.ProjectBL
                 Name = request.Name,
                 CustomerName = request.CustomerName,
                 ExecutorName = request.ExecutorName,
-                StartedAt = DateTime.UtcNow,
-                OwnerId = ownerId,
+                StartedAt = request.StartedAt,
+                CompletedAt = request.CompletedAt,
+                OwnerId = request.OwnerId,
                 Priority = request.Priority,
             };
             
@@ -107,8 +108,10 @@ namespace DbHelper.BL.ProjectBL
             project.StartedAt = request.StartedAt;
             project.Priority = request.Priority;
             project.CompletedAt = request.CompletedAt;
+            project.StartedAt = request.StartedAt;
             project.CustomerName = request.CustomerName;
             project.ExecutorName = request.ExecutorName;
+            project.OwnerId = request.OwnerId;
             project.Name = request.Name;
             await _projectRepository.UpdateAsync(project);
             return new Response(200, true, "Информация о проекте успешно обновлена!");
