@@ -24,6 +24,12 @@ namespace DbHelper.WebApi.Controllers
         {
             return await _employeeManager.Create(request);
         }
+        [HttpGet("profile")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin, Manager, Employee")]
+        public async Task<EmployeeDTOResponse> GetCurrentEmployee()
+        {
+            return await _employeeManager.GetCurrentEmployee();
+        }
         [HttpGet("info/{employeeId}")]
         [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin")]
         public async Task<EmployeeDTOResponse> GetById(int employeeId)

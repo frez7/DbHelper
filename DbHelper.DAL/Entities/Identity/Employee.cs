@@ -11,6 +11,7 @@ namespace DbHelper.DAL.Entities.Identity
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
         public List<ProjectEmployee>? ProjectEmployees { get; set; }
+        public List<ProjectTask>? Tasks { get; set; }
 
     }
 }

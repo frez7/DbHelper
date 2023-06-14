@@ -12,6 +12,7 @@ namespace DbHelper.WebApi.AuthBL.Data
         public DbSet<Project> Projects { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<ProjectEmployee> ProjectEmployees { get; set; }
+        public DbSet<ProjectTask> Tasks { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
         {
@@ -53,7 +54,17 @@ namespace DbHelper.WebApi.AuthBL.Data
                 .WithMany(b => b.ProjectEmployees)
                 .HasForeignKey(a => a.EmployeeId)
                 .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProjectTask>()
+                .HasOne(t => t.Executor)
+                .WithMany(e => e.Tasks)
+                .HasForeignKey(t => t.ExecutorId)
+                .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<ProjectTask>()
+                .HasOne(t => t.Project)
+                .WithMany(p => p.Tasks)
+                .HasForeignKey(t => t.ProjectId)
+                .OnDelete(DeleteBehavior.NoAction);
 
 
             #region SeedData

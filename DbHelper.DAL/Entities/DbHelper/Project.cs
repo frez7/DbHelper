@@ -9,6 +9,7 @@ namespace DbHelper.DAL.Entities.DbHelper
         public string CustomerName { get; set; }
         public string ExecutorName { get; set; }
         public List<ProjectEmployee>? ProjectEmployees { get; set; }
+        public List<ProjectTask>? Tasks { get; set; }
         public Employee Owner { get; set; }
         public int OwnerId { get; set; }
         public DateTime StartedAt { get; set; }

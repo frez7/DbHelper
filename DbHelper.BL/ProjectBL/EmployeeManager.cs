@@ -1,4 +1,5 @@
-﻿using DbHelper.DAL.Common;
+﻿using DbHelper.BL.OtherServices;
+using DbHelper.DAL.Common;
 using DbHelper.DAL.Common.ProjectResponses;
 using DbHelper.DAL.Data;
 using DbHelper.DAL.Entities.DTOs;
@@ -14,12 +15,16 @@ namespace DbHelper.BL.ProjectBL
         private readonly IRepository<Employee> _employeeRepository;
         private readonly IRepository<IdentityUserRole<int>> _identityUserRoleRepository;
         private readonly UserManager<Employee> _userManager;
+        private readonly GetUserService _getUserService;
 
-        public EmployeeManager(IRepository<Employee> employeeRepository, IRepository<IdentityUserRole<int>> identityUserRoleRepository, UserManager<Employee> userManager)
+        public EmployeeManager(IRepository<Employee> employeeRepository, 
+            IRepository<IdentityUserRole<int>> identityUserRoleRepository, 
+            UserManager<Employee> userManager, GetUserService getUserService)
         {
             _employeeRepository = employeeRepository;
             _identityUserRoleRepository = identityUserRoleRepository;
             _userManager = userManager;
+            _getUserService = getUserService;
         }
         public async Task<EmployeeResponse> Create(CreateEmployeeRequest request)
         {
@@ -47,6 +52,12 @@ namespace DbHelper.BL.ProjectBL
             };
             await _identityUserRoleRepository.AddAsync(userRole);
             return new EmployeeResponse(200, true, "Вы успешно создали новый профиль для сотрудника!", employee.Id, request.Email, request.Password);
+        }
+        public async Task<EmployeeDTOResponse> GetCurrentEmployee()
+        {
+            var userId = await _getUserService.GetCurrentUserId();
+            var response = await GetById(userId);
+            return response;
         }
         public async Task<EmployeeDTOResponse> GetById(int employeeId)
         {

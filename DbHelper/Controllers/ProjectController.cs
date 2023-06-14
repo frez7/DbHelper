@@ -25,7 +25,7 @@ namespace DbHelper.WebApi.Controllers
             return await _projectManager.Create(request);
         }
         [HttpGet("info/{projectId}")]
-        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin, Manager")]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = "Admin, Manager, Employee")]
         public async Task<ProjectDTOResponse> GetById(int projectId)
         {
             return await _projectManager.GetById(projectId);

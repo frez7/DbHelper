@@ -36,12 +36,14 @@ builder.Services.AddTransient<ValidateService>();
 builder.Services.AddTransient<ProjectManager>();
 builder.Services.AddTransient<EmployeeManager>();
 builder.Services.AddTransient<FilterService>();
+builder.Services.AddTransient<TaskManager>();
 builder.Services.AddTransient<ProjectEmployeeManager>();
 
 builder.Services.AddTransient<IRepository<Employee>, Repository<Employee>>();
 builder.Services.AddTransient<IRepository<IdentityUserRole<int>>, Repository<IdentityUserRole<int>>>();
 builder.Services.AddTransient<IRepository<Project>, Repository<Project>>();
 builder.Services.AddTransient<IRepository<ProjectEmployee>, Repository<ProjectEmployee>>();
+builder.Services.AddTransient<IRepository<ProjectTask>, Repository<ProjectTask>>();
 builder.Services.AddTransient<ProjectRepository>();
 builder.Services.AddTransient<ProjectEmployeeRepository>();
 
@@ -116,11 +118,12 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DbHelper");
+});
+
 app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();

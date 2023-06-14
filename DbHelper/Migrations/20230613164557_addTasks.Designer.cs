@@ -4,6 +4,7 @@ using DbHelper.WebApi.AuthBL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbHelper.WebApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20230613164557_addTasks")]
+    partial class addTasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,6 +90,9 @@ namespace DbHelper.WebApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Enum")
+                        .HasColumnType("int");
+
                     b.Property<int>("ExecutorId")
                         .HasColumnType("int");
 
@@ -102,9 +107,6 @@ namespace DbHelper.WebApi.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -207,7 +209,7 @@ namespace DbHelper.WebApi.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7f586a86-3aaa-45ca-82d7-5455f60b612d",
+                            ConcurrencyStamp = "43de6af9-d6f4-402e-b902-c8e6a1b6a061",
                             Email = "freezedmail@gmail.com",
                             EmailConfirmed = true,
                             FatherName = "Адылжанович",
@@ -216,9 +218,9 @@ namespace DbHelper.WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FREEZEDMAIL@GMAIL.COM",
                             NormalizedUserName = "FREZ773",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHYMnvg9Z2L8KbUKcmg2OniBSHfzuMtk9fioYy/6r36Ubp3Jl91cAG4m4hV8h/9i8A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELivbQ4WmmCq/zuDUT6RWBC1vusRXli1ReIbbvq+eDAWakPSf/JeFkzt10tz/1a/7A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7bdced43-a57d-4391-a7a8-0d89dd6fe03b",
+                            SecurityStamp = "eea9ae73-6ea8-4fb3-b320-641999800628",
                             TwoFactorEnabled = false,
                             UserName = "frez773"
                         },
@@ -226,7 +228,7 @@ namespace DbHelper.WebApi.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27416ef4-404f-4c9e-ba8c-b6471b0b8455",
+                            ConcurrencyStamp = "22b9aa35-665f-4764-850b-d43744d3153f",
                             Email = "test1@example.com",
                             EmailConfirmed = true,
                             FatherName = "Амантурович",
@@ -235,9 +237,9 @@ namespace DbHelper.WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST1@EXAMPLE.COM",
                             NormalizedUserName = "TEST1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHX2WlxryK4VQt8GdttMjezrpmDMGcWv8ylAKD+mLqXHr2QAFvh1eJFmebd2P5P57g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGa8GbViWBre2tNSJyoWU1f1svePdXYXQ5TtNOVXDdSzY6a9cNoO3EzrKluGypfojg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "64c5e4f5-f757-44e9-98b1-f7ae2dba39fe",
+                            SecurityStamp = "0f82467c-3d33-4213-83f1-b01668f4b854",
                             TwoFactorEnabled = false,
                             UserName = "test1"
                         },
@@ -245,7 +247,7 @@ namespace DbHelper.WebApi.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3be55e55-de63-4fc7-97e5-f79a683e51ca",
+                            ConcurrencyStamp = "d3a3d9e7-bc84-43d4-84f8-f55dc814c5fc",
                             Email = "test2@example.com",
                             EmailConfirmed = true,
                             FatherName = "Атайбекович",
@@ -254,9 +256,9 @@ namespace DbHelper.WebApi.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEST2@EXAMPLE.COM",
                             NormalizedUserName = "TEST2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIRtt1P/mmgbFpn5pa1P4BU7CQkQKvj0LorOqRJq/wRLzv0BGvDngPC4Go71x+o5Ag==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECAaLYDACzx+AKPFSC8UDMCrekyCSbhe+XswaW2255onyTBVs7iKgInbKPtRLX5vhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "680147ef-fe1d-47e4-861e-0644fb83eadd",
+                            SecurityStamp = "07aa831e-bbad-4ec2-ae6f-3310b60f1451",
                             TwoFactorEnabled = false,
                             UserName = "test2"
                         });
@@ -295,21 +297,21 @@ namespace DbHelper.WebApi.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "4633d52f-4d3c-4ec0-94c7-64902042975f",
+                            ConcurrencyStamp = "67914feb-ba3c-4da9-a47e-2b01407bddae",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "8819c228-2cd9-43d2-8f93-8258936d2dfe",
+                            ConcurrencyStamp = "0fd0d682-f690-4699-bf16-fe22fda82063",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "13e8c5b5-1d6a-4762-b71d-790bb5f6e565",
+                            ConcurrencyStamp = "03732727-1a2f-4ee9-ae5f-670e2d0b91a5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
